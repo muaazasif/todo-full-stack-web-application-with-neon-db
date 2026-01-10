@@ -10,19 +10,6 @@ __pycache__/
 .pytest_cache/
 *.egg-info/
 
-# ===== Node / Frontend =====
-node_modules/
-.next/
-out/
-dist/
-build/
-frontend/node_modules/
-frontend/.next/
-frontend/out/
-frontend/dist/
-frontend/build/
-frontend/.vercel/
-frontend/.netlify/
 
 # ===== Testing / Logs =====
 coverage/
