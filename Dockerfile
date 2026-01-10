@@ -10,6 +10,6 @@ WORKDIR /app/backend
 # Copy the entire backend directory to backend/
 COPY backend/ .
 
-EXPOSE 8000
+EXPOSE $PORT
 
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port $PORT --reload=false"]
