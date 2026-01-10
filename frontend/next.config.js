@@ -8,7 +8,8 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
   },
-  // For GitHub Pages project sites, we need to set the asset prefix
+  // For GitHub Pages project sites, we need to set the asset prefix and basePath
+  basePath: '/todo-full-stack-web-application-with-neon-db',
   assetPrefix: '/todo-full-stack-web-application-with-neon-db',
 };
 
