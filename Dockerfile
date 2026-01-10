@@ -12,4 +12,4 @@ COPY backend/ .
 
 EXPOSE $PORT
 
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port $PORT --reload=false"]
+CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
