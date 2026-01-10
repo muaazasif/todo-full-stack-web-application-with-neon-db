@@ -2,9 +2,18 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "01-multi-user-todo" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "01-multi-user-todo" ]
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
@@ -34,7 +43,7 @@ jobs:
     - name: Setup Pages
       uses: actions/configure-pages@v4
 
-    - name: Upload artifact
+    - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: 'frontend/out'
@@ -42,4 +51,4 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
-      if: github.ref == 'refs/heads/01-multi-user-todo'
+      if: github.ref == 'refs/heads/main'
