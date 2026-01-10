@@ -9,7 +9,6 @@ const nextConfig = {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
   },
   basePath: '/todo-full-stack-web-application-with-neon-db',
-  assetPrefix: '/todo-full-stack-web-application-with-neon-db/',
 };
 
 module.exports = nextConfig;
