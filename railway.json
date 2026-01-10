@@ -1,7 +1,7 @@
 {
   "build": {
     "builder": "dockerfile",
-    "dockerfilePath": "Dockerfile"
+    "dockerfilePath": "./Dockerfile"
   },
   "deploy": {
     "restartPolicy": "always"
