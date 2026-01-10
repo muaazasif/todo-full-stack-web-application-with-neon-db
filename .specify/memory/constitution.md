@@ -1,55 +1,55 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- SYNC IMPACT REPORT
+Version change: 1.0.0 → 1.1.0
+Modified principles: None renamed, added specific tech stack principles
+Added sections: Backend, Frontend, Authentication, API Enforcement
+Removed sections: None
+Templates requiring updates: ✅ Updated all templates
+Follow-up TODOs: None
+-->
+# Todo Full-Stack Web Application Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Spec-Driven Development (NON-NEGOTIABLE)
+Every feature must be defined in specifications before implementation begins. No manual coding is allowed without a corresponding spec. All development work must trace back to documented requirements in the feature specification files located at `/specs/[feature-name]/spec.md`.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Full-Stack Architecture
+The application follows a clear separation of concerns with a backend API service and a separate frontend client. The backend provides RESTful APIs consumed by the frontend, with clear contract definitions between layers.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Technology Stack Adherence
+Backend services must utilize FastAPI framework with SQLModel for database operations and Neon PostgreSQL for data persistence. Frontend development must use Next.js with the App Router pattern for routing and component organization.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Authentication & Authorization
+All user-facing features must implement Better Auth for authentication, issuing JWT tokens for session management. Proper authorization patterns must be followed to ensure secure access control.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. API Isolation & Security (NON-NEGOTIABLE)
+All API endpoints must enforce user isolation via JWT token validation. Each request must be authenticated and authorized to access only resources belonging to the authenticated user. No endpoint should allow unauthorized access to user-specific data.
 
-### [PRINCIPLE_6_NAME]
+### VI. Test-First Approach
+All features must have comprehensive test coverage before implementation. Unit tests, integration tests, and end-to-end tests must be written to validate functionality, security, and performance requirements.
 
+## Backend Requirements
 
-[PRINCIPLE__DESCRIPTION]
+Backend services must be built using FastAPI framework to leverage its async capabilities and automatic API documentation generation. SQLModel must be used for database modeling to maintain consistency between SQLAlchemy ORM and Pydantic models. Neon PostgreSQL must be used as the primary data store with proper connection pooling and transaction management.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Frontend Requirements
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Frontend development must follow Next.js best practices with the App Router for file-based routing. Components should be reusable and follow modern React patterns with TypeScript for type safety. The UI must be responsive and accessible across different device sizes.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Authentication & Security
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Better Auth must be implemented for all user authentication needs. JWT tokens issued by Better Auth must be validated on all protected endpoints. Session management, password reset, and account recovery flows must be properly implemented and secured.
+
+## API Design Standards
+
+All APIs must follow RESTful principles with consistent naming conventions. Proper HTTP status codes must be returned for all responses. API rate limiting and input validation must be implemented to prevent abuse and injection attacks.
+
+## Development Workflow
+
+All features must follow the spec-driven development workflow: specification → plan → tasks → implementation. Code reviews are mandatory for all pull requests. Automated testing must pass before merging. Continuous integration pipelines must validate all requirements before deployment.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution governs all development activities for the Todo Full-Stack Web Application. All team members must comply with these principles. Amendments require documentation and approval from project leadership. Version control follows semantic versioning principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE): Date of original adoption | **Last Amended**: 2026-01-09
