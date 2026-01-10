@@ -67,19 +67,38 @@ const TaskList = ({ userId, authToken }) => {
     setFilteredTasks(result);
   }, [tasks, filter, sort]);
 
-  if (loading) return <div>Loading tasks...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return (
+    <div className="task-list-container bg-white/90 backdrop-blur-lg p-10 rounded-3xl shadow-2xl border border-white/50 animate-fade-in-up">
+      <div className="flex flex-col items-center justify-center py-12">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500 mb-4"></div>
+        <p className="text-gray-600">Loading your tasks...</p>
+      </div>
+    </div>
+  );
+
+  if (error) return (
+    <div className="task-list-container bg-white/90 backdrop-blur-lg p-10 rounded-3xl shadow-2xl border border-white/50 animate-fade-in-up">
+      <div className="flex flex-col items-center justify-center py-12">
+        <div className="bg-red-100 p-4 rounded-full mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <p className="text-red-600 font-medium">Error: {error}</p>
+      </div>
+    </div>
+  );
 
   return (
-    <div className="task-list-container bg-gradient-to-br from-white to-indigo-50 p-6 rounded-2xl shadow-xl border border-gray-200">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div className="task-list-container bg-white/90 backdrop-blur-lg p-8 rounded-3xl shadow-2xl border border-white/50 transform transition-all duration-500 hover:shadow-3xl animate-fade-in-up">
+      <div className="flex items-center justify-between mb-6 animate-fade-in-down">
+        <h2 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" className="mr-3 h-7 w-7 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002 2h2a2 2 0 002-2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
           </svg>
           My Tasks
         </h2>
-        <div className="text-sm text-gray-500">
+        <div className="text-sm font-medium text-indigo-700 bg-white/80 px-4 py-2 rounded-full shadow-sm">
           {filteredTasks.length} {filteredTasks.length === 1 ? 'task' : 'tasks'}
         </div>
       </div>
@@ -91,25 +110,36 @@ const TaskList = ({ userId, authToken }) => {
         setSort={setSort}
       />
 
-      <div className="task-list mt-4">
+      <div className="task-list mt-6 animate-fade-in-up delay-100">
         {filteredTasks.length === 0 ? (
-          <div className="text-center py-12">
-            <div className="flex justify-center mb-4">
-              <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16" />
+          <div className="text-center py-16 animate-fade-in-up delay-200">
+            <div className="flex justify-center mb-6">
+              <div className="bg-gradient-to-r from-indigo-100 to-purple-100 p-6 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 002 2h2a2 2 0 002-2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                </svg>
+              </div>
             </div>
-            <p className="text-gray-500 text-lg">No tasks found. Create your first task!</p>
-            <p className="text-gray-400 mt-2">Add a new task using the form above</p>
+            <p className="text-xl text-gray-600 font-medium">No tasks found</p>
+            <p className="text-gray-500 mt-2">Create your first task using the form above</p>
           </div>
         ) : (
-          filteredTasks.map(task => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              userId={userId}
-              authToken={authToken}
-              onUpdate={fetchTasks} // Refresh tasks after update
-            />
-          ))
+          <div className="space-y-4">
+            {filteredTasks.map((task, index) => (
+              <div
+                key={task.id}
+                className="animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <TaskItem
+                  task={task}
+                  userId={userId}
+                  authToken={authToken}
+                  onUpdate={fetchTasks} // Refresh tasks after update
+                />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

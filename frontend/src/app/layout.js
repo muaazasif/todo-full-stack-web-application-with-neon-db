@@ -1,5 +1,6 @@
 // frontend/src/app/layout.js
 import './globals.css';
+import '../components/auth/animations.css';
 import Navbar from '../components/layout/Navbar';
 import AuthProviderWrapper from '../components/providers/AuthProviderWrapper';
 
