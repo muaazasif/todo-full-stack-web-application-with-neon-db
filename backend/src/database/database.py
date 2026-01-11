@@ -11,13 +11,18 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./todo_app.db")
 # Handle different database types
 if DATABASE_URL.startswith("postgresql://"):
     # PostgreSQL connection (including Neon)
+    # More robust connection settings for mobile networks
     connect_args = {
-        "connect_timeout": 10,
+        "connect_timeout": 20,  # Longer timeout for mobile networks
+        "command_timeout": 30,  # Timeout for individual commands
     }
-    # Engine parameters for PostgreSQL
+    # Engine parameters for PostgreSQL with mobile optimization
     engine_kwargs = {
-        "pool_pre_ping": True,  # Verify connections before use
-        "pool_recycle": 300,    # Recycle connections every 5 minutes
+        "pool_pre_ping": True,      # Verify connections before use
+        "pool_recycle": 300,        # Recycle connections every 5 minutes
+        "pool_size": 20,            # Increase pool size for concurrent requests
+        "max_overflow": 30,         # Allow more overflow connections
+        "pool_timeout": 30,         # Timeout for getting connection from pool
     }
 elif DATABASE_URL.startswith("sqlite:///./"):
     # Convert relative path to absolute path if using SQLite
@@ -40,7 +45,15 @@ else:
     engine_kwargs = {}
 
 # Create engine with appropriate parameters
-engine = create_engine(DATABASE_URL, echo=True, connect_args=connect_args, **engine_kwargs)
+engine = create_engine(
+    DATABASE_URL,
+    echo=True,
+    connect_args=connect_args,
+    **engine_kwargs,
+    # Additional parameters for mobile network stability
+    pool_pre_ping=True,
+    pool_recycle=300
+)
 
 def get_session() -> Generator[Session, None, None]:
     with Session(engine) as session:

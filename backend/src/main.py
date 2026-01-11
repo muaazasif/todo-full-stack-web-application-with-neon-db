@@ -26,6 +26,8 @@ app.add_middleware(
     allow_headers=["*"],
     # Additional headers that might help with mobile network issues
     allow_origin_regex=r"https?://.*",
+    # Additional settings for mobile network compatibility
+    allow_private_networks=True,
 )
 
 # Include routers
