@@ -5,10 +5,13 @@ COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set working directory to app root
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copy the entire backend directory to backend/
-COPY backend/ .
+COPY backend/ ./backend/
+
+# Copy package.json
+COPY package.json .
 
 # Copy the startup script
 COPY startup.sh .
