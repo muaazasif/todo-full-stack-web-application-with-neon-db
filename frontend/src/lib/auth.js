@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token');
         if (token) {
           // Attempt to get user profile from backend
-          const response = await fetch('http://localhost:8000/api/user/profile', {
+          const response = await fetch('https://todo-full-stack-web-application-with-neon-db-production.up.railway.app/api/user/profile', {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:8000/api/auth/signin', {
+      const response = await fetch('https://todo-full-stack-web-application-with-neon-db-production.up.railway.app/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
         const { access_token } = data; // Note: backend returns access_token, not user data
 
         // First, get user profile using the token
-        const userResponse = await fetch('http://localhost:8000/api/user/profile', {
+        const userResponse = await fetch('https://todo-full-stack-web-application-with-neon-db-production.up.railway.app/api/user/profile', {
           headers: {
             'Authorization': `Bearer ${access_token}`,
             'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (name, email, password) => {
     try {
-      const response = await fetch('http://localhost:8000/api/auth/signup', {
+      const response = await fetch('https://todo-full-stack-web-application-with-neon-db-production.up.railway.app/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

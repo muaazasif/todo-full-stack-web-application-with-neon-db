@@ -2,7 +2,7 @@
 // This file would contain utility functions for interacting with the tasks API
 // In a real implementation, this would be used by the components to make API calls
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://todo-full-stack-web-application-with-neon-db-production.up.railway.app';
 
 /**
  * Fetch all tasks for a user
