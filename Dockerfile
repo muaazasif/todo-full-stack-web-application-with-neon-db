@@ -19,4 +19,4 @@ RUN chmod +x startup.sh
 
 EXPOSE 8000
 
-CMD ["./startup.sh"]
+CMD ["sh", "-c", "cd /app/backend && exec uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
