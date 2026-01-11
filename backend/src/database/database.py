@@ -49,10 +49,7 @@ engine = create_engine(
     DATABASE_URL,
     echo=True,
     connect_args=connect_args,
-    **engine_kwargs,
-    # Additional parameters for mobile network stability
-    pool_pre_ping=True,
-    pool_recycle=300
+    **engine_kwargs
 )
 
 def get_session() -> Generator[Session, None, None]:
