@@ -10,6 +10,10 @@ WORKDIR /app/backend
 # Copy the entire backend directory to backend/
 COPY backend/ .
 
+# Copy the startup script
+COPY startup.sh .
+RUN chmod +x startup.sh
+
 EXPOSE 8000
 
-CMD ["sh", "-c", "PORT=${PORT:-8000} exec uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
+CMD ["./startup.sh"]
