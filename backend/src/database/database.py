@@ -11,7 +11,11 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./todo_app.db")
 # Handle different database types
 if DATABASE_URL.startswith("postgresql://"):
     # PostgreSQL connection (including Neon)
-    connect_args = {}
+    # Add SSL parameters for better connection stability
+    connect_args = {
+        "connect_timeout": 10,
+        "pool_pre_ping": True,  # Verify connections before use
+    }
     # For PostgreSQL, we don't need special connect_args like SQLite
 elif DATABASE_URL.startswith("sqlite:///./"):
     # Convert relative path to absolute path if using SQLite
