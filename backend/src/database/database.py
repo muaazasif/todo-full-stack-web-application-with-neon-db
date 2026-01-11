@@ -11,10 +11,9 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./todo_app.db")
 # Handle different database types
 if DATABASE_URL.startswith("postgresql://"):
     # PostgreSQL connection (including Neon)
-    # More robust connection settings for mobile networks
+    # Valid connection parameters for PostgreSQL
     connect_args = {
-        "connect_timeout": 20,  # Longer timeout for mobile networks
-        "command_timeout": 30,  # Timeout for individual commands
+        "connect_timeout": 20,  # Connection timeout in seconds
     }
     # Engine parameters for PostgreSQL with mobile optimization
     engine_kwargs = {
