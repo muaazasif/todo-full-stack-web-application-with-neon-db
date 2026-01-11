@@ -12,4 +12,4 @@ COPY backend/ .
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
+CMD ["sh", "-c", "PORT=${PORT:-8000} exec uvicorn src.main:app --host 0.0.0.0 --port $PORT"]
