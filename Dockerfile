@@ -5,18 +5,11 @@ COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set working directory to app root
-WORKDIR /app
+WORKDIR /app/backend
 
 # Copy the entire backend directory to backend/
-COPY backend/ ./backend/
-
-# Copy package.json
-COPY package.json .
-
-# Copy the startup script
-COPY startup.sh .
-RUN chmod +x startup.sh
+COPY backend/ .
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "cd /app/backend && exec uvicorn src.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["python", "-c", "import os; port = int(os.environ.get('PORT', 8000)); import uvicorn; from src.main import app; uvicorn.run(app, host='0.0.0.0', port=port)"]
