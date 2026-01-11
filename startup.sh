@@ -2,7 +2,8 @@
 # Startup script for Railway deployment
 
 # Set default port if not provided
-PORT=${PORT:-8000}
+DEFAULT_PORT=8000
+PORT=${PORT:-$DEFAULT_PORT}
 
 echo "Starting application on port $PORT"
 
